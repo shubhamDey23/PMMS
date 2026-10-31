@@ -4,7 +4,11 @@ import './globals.css'
 export const metadata: Metadata = {
   title: 'Project Monitoring & Management System',
   description: 'Government Project Monitoring & Management System — Department of Planning & Development.',
-  icons: { icon: '/favicon.svg' },
+  icons: {
+    icon: '/favicon.png',
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
+  },
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

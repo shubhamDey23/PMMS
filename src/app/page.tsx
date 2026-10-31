@@ -64,10 +64,31 @@ function Button({ children, className = '', onClick, title }: { children: React.
 }
 
 function Logo({ compact = false }: { compact?: boolean }) {
-  return <div className="brand">
-    <div className="emblem"><ShieldCheck size={22} /></div>
-    {!compact && <div><strong>PMMS</strong><span>Government of State</span></div>}
-  </div>
+  if (compact) {
+    return (
+      <div className="brand brand-compact" title="Government Project Monitoring Dashboard">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/logo-icon.png"
+          alt="PMMS Icon"
+          className="brand-logo-icon"
+          width={38}
+          height={38}
+        />
+      </div>
+    )
+  }
+
+  return (
+    <div className="brand brand-full">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/logo.png"
+        alt="Government Project Monitoring Dashboard"
+        className="brand-logo-full"
+      />
+    </div>
+  )
 }
 
 function Sidebar({ collapsed, setCollapsed, view, setView, mobileOpen, closeMobile }: {
@@ -100,6 +121,8 @@ function Sidebar({ collapsed, setCollapsed, view, setView, mobileOpen, closeMobi
 function Header({ onMenu }: { onMenu: () => void }) {
   return <header className="topbar">
     <Button className="icon-btn menu-btn" onClick={onMenu}><Menu size={21} /></Button>
+    {/* eslint-disable-next-line @next/next/no-img-element */}
+    <img src="/logo-icon.png" alt="PMMS Logo" className="topbar-icon" width={32} height={32} />
     <div className="portal-title"><strong>Project Monitoring & Management System</strong><span>Department of Planning & Development</span></div>
     <div className="global-search"><Search size={18} /><input placeholder="Search projects, IDs, locations..." /><kbd>⌘ K</kbd></div>
     <button className="fy-select"><CalendarDays size={17} /><span>FY 2024–25</span><ChevronDown size={15} /></button>
@@ -175,8 +198,14 @@ function AdminAnalytics() {
       </div>
       <div className="card dept-card">
         <div className="card-title"><div><h3>Department performance</h3><p>Physical and financial achievement</p></div><ArrowUpRight size={18} /></div>
-        {[['Rural Works','128 projects',84,76],['Public Health','96 projects',78,72],['Education','84 projects',91,88],['Water Resources','72 projects',69,62],['Health & Family','58 projects',74,68]].map((d) =>
-          <div className="dept-row" key={d[0]}><div className="dept-icon">{d[0].slice(0,2).toUpperCase()}</div><div className="dept-info"><div><strong>{d[0]}</strong><span>{d[1]}</span></div><div className="dual-bars"><span><i style={{ width: `${d[2]}%` }} /></span><span><i style={{ width: `${d[3]}%` }} /></span></div></div><b>{d[2]}%</b></div>)}
+        {[
+          { name: 'Rural Works', count: '128 projects', physical: 84, financial: 76 },
+          { name: 'Public Health', count: '96 projects', physical: 78, financial: 72 },
+          { name: 'Education', count: '84 projects', physical: 91, financial: 88 },
+          { name: 'Water Resources', count: '72 projects', physical: 69, financial: 62 },
+          { name: 'Health & Family', count: '58 projects', physical: 74, financial: 68 },
+        ].map((d) =>
+          <div className="dept-row" key={d.name}><div className="dept-icon">{d.name.slice(0, 2).toUpperCase()}</div><div className="dept-info"><div><strong>{d.name}</strong><span>{d.count}</span></div><div className="dual-bars"><span><i style={{ width: `${d.physical}%` }} /></span><span><i style={{ width: `${d.financial}%` }} /></span></div></div><b>{d.physical}%</b></div>)}
       </div>
     </div>
   </section>
