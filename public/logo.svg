@@ -1,0 +1,15 @@
+<svg width="220" height="48" viewBox="0 0 220 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="2" y="5" width="38" height="38" rx="10" fill="url(#brandGrad)" />
+  <path d="M21 13L29 17.5V26.5L21 31L13 26.5V17.5L21 13Z" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+  <circle cx="21" cy="22" r="3" fill="white"/>
+  <path d="M21 17V20M21 24V27M16.5 19.5L19 21M23 23L25.5 24.5M16.5 24.5L19 23M23 21L25.5 19.5" stroke="white" stroke-width="1.5"/>
+  <text x="48" y="21" font-family="Inter, sans-serif" font-weight="700" font-size="13" fill="#176b1c" letter-spacing="0.08em">PMMS PORTAL</text>
+  <text x="48" y="34" font-family="Inter, sans-serif" font-weight="500" font-size="9" fill="#647067">Project Monitoring &amp; Mgmt</text>
+  <defs>
+    <linearGradient id="brandGrad" x1="2" y1="5" x2="40" y2="43" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2b9b2b"/>
+      <stop offset="1" stop-color="#176b1c"/>
+    </linearGradient>
+  </defs>
+</svg>
+
