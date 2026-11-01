@@ -304,9 +304,9 @@ export interface TranslationSchema {
 
 export const translations: Record<Language, TranslationSchema> = {
   en: {
-    portalName: 'ecentric Project Monitoring Portal',
+    portalName: 'eSapmada by Eccentric',
     departmentName: 'Department of Planning & Infrastructure',
-    stateGov: 'ecentric Corporate Services',
+    stateGov: 'eSapmada by Eccentric',
     searchPlaceholder: 'Search projects, IDs, locations, or departments...',
     fy: 'FY 2024–25',
     adminLogin: 'Admin Login',
@@ -606,9 +606,9 @@ export const translations: Record<Language, TranslationSchema> = {
   },
 
   hi: {
-    portalName: 'ecentric परियोजना निगरानी पोर्टल',
+    portalName: 'eSapmada by Eccentric — परियोजना निगरानी पोर्टल',
     departmentName: 'योजना एवं अवसंरचना विभाग',
-    stateGov: 'ecentric कॉर्पोरेट सर्विसेज',
+    stateGov: 'eSapmada by Eccentric',
     searchPlaceholder: 'परियोजना, आईडी, स्थान या विभाग खोजें...',
     fy: 'वित्त वर्ष 2024–25',
     adminLogin: 'प्रशासनिक लॉगिन',

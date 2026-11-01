@@ -91,9 +91,9 @@ export function LoginFormClient({ initialNextUrl }: { initialNextUrl: string }) 
 
   return (
     <div className="ecentric-login-layout">
-      {/* Top bar with ecentric logo and back to home */}
+      {/* Top bar with eSapmada by Eccentric logo and back to home */}
       <div className="login-top-nav">
-        <Link href="/" className="login-nav-logo" title="ecentric Portal">
+        <Link href="/" className="login-nav-logo" title="eSapmada by Eccentric Portal">
           <Logo />
         </Link>
         <Link href="/" className="login-nav-back">
@@ -106,7 +106,7 @@ export function LoginFormClient({ initialNextUrl }: { initialNextUrl: string }) 
         {/* Left Side: Welcome Hero Copy matching screenshot */}
         <div className="ecentric-login-hero">
           <div className="hero-text-block">
-            <h1 className="hero-heading">Welcome to ecentric</h1>
+            <h1 className="hero-heading">Welcome to eSapmada by Eccentric</h1>
             <p className="hero-description">
               An online monitoring system, End to End AI &amp; Blockchain based Portal for Monitoring
               all the Inventories Supplied, Raising Complaints &amp; Suggesting better Vendors/Suppliers.
@@ -224,7 +224,7 @@ export function LoginFormClient({ initialNextUrl }: { initialNextUrl: string }) 
                   href="#forgot-password"
                   onClick={(e) => {
                     e.preventDefault()
-                    alert('Please contact your ecentric system administrator to reset your credentials.')
+                    alert('Please contact your eSapmada by Eccentric system administrator to reset your credentials.')
                   }}
                   className="forgot-password-link"
                 >
@@ -258,7 +258,7 @@ export function LoginFormClient({ initialNextUrl }: { initialNextUrl: string }) 
                   href="#signup"
                   onClick={(e) => {
                     e.preventDefault()
-                    alert('Officer registration is managed through the ecentric administrative portal. Contact your department administrator.')
+                    alert('Officer registration is managed through the eSapmada by Eccentric administrative portal. Contact your department administrator.')
                   }}
                   className="signup-link"
                 >

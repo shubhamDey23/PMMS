@@ -211,7 +211,7 @@ class ProjectService {
       remarks: input.remarks?.trim() || 'Newly registered project.',
       documents,
       activityLog: [
-        { id: `act-${Date.now()}`, action: 'Project sanctioned and entered into PMMS portal', by: 'Authenticated Administrator', date: 'Just now' },
+        { id: `act-${Date.now()}`, action: 'Project sanctioned and entered into eSapmada by Eccentric portal', by: 'Authenticated Administrator', date: 'Just now' },
       ],
 
       // Backward compatibility getters

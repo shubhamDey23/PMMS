@@ -47,6 +47,21 @@ The platform provides a public-facing transparency dashboard for citizens, an in
   6. *Supporting Documents*: Dynamic document attachment tool with file type, size, and title.
 - **Instant Reactive Dashboard Update**: Newly sanctioned projects immediately populate the project register, KPIs, and geographic map via `projectService`.
 
+### 6. Interactive Admin Help Assistant (`/admin/help`)
+- **10 Core Support Categories**: Getting Started, Dashboard & Analytics, Project Management, Adding New Projects, Project Details, Geographic Monitoring, English & Hindi Settings, Financial Reports, User Account & Login, and Troubleshooting.
+- **100% Offline Q&A Engine**: Built-in deterministic knowledge base with zero external AI dependencies or paid API keys.
+- **Instant Bilingual Search**: Search keywords and topics across questions, answers, and tags in both English and हिन्दी.
+- **Conversational UI & Deep Links**: Interactive question and answer stream with contextual action buttons (e.g. *Add New Project*, *View Project Map*, *Open Reports*), related follow-up chips, and conversation reset controls.
+- **Floating Help Trigger**: Always-accessible floating assistant button in the admin shell for immediate guidance on any screen.
+
+### 7. Interactive Leaflet & OpenStreetMap Project Map (`/admin/map`)
+- **OpenStreetMap Standard Tile Provider**: Seamless raster map integration (`https://tile.openstreetmap.org/{z}/{x}/{y}.png`) with compliant attribution.
+- **Status-Coded SVG Markers**: Real-time project markers with status color coding (Ongoing, Completed, Delayed) and pulsating locator rings.
+- **Interactive Map Popups**: Displays project ID, bilingual name, department, location hierarchy, physical progress bar, financial breakdown, and direct integration with the `ProjectDrawer`.
+- **Side Panel & Fly-To Controls**: Collapsible project list with search and block/status filters; selecting any project flies the map smoothly to its GPS coordinates and opens its popup.
+- **Device Geolocation**: "Show My Location" control queries device GPS to display user location and proximity to infrastructure projects.
+- **SSR Safe**: Dynamically imported with `ssr: false` to guarantee flawless React 19 / Next.js hydration without server-side window errors.
+
 ---
 
 ## Default Development Credentials

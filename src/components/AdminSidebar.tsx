@@ -115,7 +115,7 @@ export function AdminSidebar({
               <HelpCircle size={19} />
               <div>
                 <strong>{language === 'hi' ? 'सहायता चाहिए?' : 'Need assistance?'}</strong>
-                <span>{language === 'hi' ? 'PMMS हेल्पडेस्क से संपर्क करें' : 'Contact PMMS helpdesk'}</span>
+                <span>{language === 'hi' ? 'eSapmada हेल्पडेस्क से संपर्क करें' : 'Contact eSapmada helpdesk'}</span>
               </div>
             </div>
           )}

@@ -6,6 +6,7 @@ import { logoutAction } from '@/app/actions/auth'
 import { AdminHeader } from './AdminHeader'
 import { AdminSidebar } from './AdminSidebar'
 import { AdminDrawerProvider } from '@/context/AdminDrawerContext'
+import { FloatingHelpButton } from '@/components/help/FloatingHelpButton'
 
 export function AdminLayoutShell({ children }: { children: React.ReactNode }) {
   const router = useRouter()
@@ -36,6 +37,7 @@ export function AdminLayoutShell({ children }: { children: React.ReactNode }) {
           onLogout={handleLogout}
         />
         <main>{children}</main>
+        <FloatingHelpButton />
       </div>
     </AdminDrawerProvider>
   )

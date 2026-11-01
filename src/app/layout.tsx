@@ -3,8 +3,8 @@ import './globals.css'
 import { LanguageProvider } from '@/context/LanguageContext'
 
 export const metadata: Metadata = {
-  title: 'ecentric — Project Monitoring & Management System',
-  description: 'ecentric Corporate Services — Comprehensive Project Monitoring, Geolocation & Management System.',
+  title: 'eSapmada by Eccentric — Project Monitoring & Management System',
+  description: 'eSapmada by Eccentric — Comprehensive Project Monitoring, Geolocation & Management System.',
   icons: {
     icon: '/logo-icon.png',
     shortcut: '/logo-icon.png',

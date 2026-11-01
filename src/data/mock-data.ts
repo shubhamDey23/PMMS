@@ -1,6 +1,7 @@
 import {
   AlertTriangle,
   BarChart3,
+  Bot,
   CheckCircle2,
   ClipboardCheck,
   Clock3,
@@ -10,6 +11,7 @@ import {
   Handshake,
   LayoutDashboard,
   Map,
+  MapPin,
   Search,
   Settings,
   Users,
@@ -415,15 +417,12 @@ export const projects: Project[] = initialProjects
 export const navItems: NavItem[] = [
   { label: 'Dashboard', labelHi: 'डैशबोर्ड', icon: LayoutDashboard, href: '/admin', exact: true },
   { label: 'Project Management', labelHi: 'परियोजना प्रबंधन', icon: FolderKanban, href: '/admin/projects' },
+  { label: 'Project Map', labelHi: 'परियोजना मानचित्र', icon: MapPin, href: '/admin/map' },
   { label: 'Project Approvals', labelHi: 'परियोजना अनुमोदन', icon: ClipboardCheck, href: '/admin/alerts' },
-  { label: 'Tender Management', labelHi: 'निविदा प्रबंधन', icon: FileCheck2, href: '/admin/projects?tab=tenders' },
   { label: 'Work Progress', labelHi: 'कार्य प्रगति', icon: BarChart3, href: '/admin/analytics' },
-  { label: 'Financial Monitoring', labelHi: 'वित्तीय निगरानी', icon: Wallet, href: '/admin/analytics?tab=financial' },
-  { label: 'Inspection Management', labelHi: 'निरीक्षण प्रबंधन', icon: Search, href: '/admin/alerts?tab=inspections' },
-  { label: 'Project Handover', labelHi: 'परियोजना हस्तांतरण', icon: Handshake, href: '/admin/alerts?tab=handover' },
-  { label: 'Reports & Analytics', labelHi: 'रिपोर्ट एवं विश्लेषण', icon: BarChart3, href: '/admin/analytics' },
-  { label: 'User Management', labelHi: 'उपयोगकर्ता प्रबंधन', icon: Users, href: '/admin/settings?tab=users' },
-  { label: 'Settings', labelHi: 'सेटिंग्स', icon: Settings, href: '/admin/settings' },
+  { label: 'Project Handover', labelHi: 'परियोजना हस्तांतरण', icon: Handshake, href: '/admin/handover' },
+  { label: 'Reports', labelHi: 'रिपोर्ट्स', icon: FileText, href: '/admin/reports' },
+  { label: 'Help Assistant', labelHi: 'सहायता सहायक', icon: Bot, href: '/admin/help' },
 ]
 
 export const stats: StatItem[] = [

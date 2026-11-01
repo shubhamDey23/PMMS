@@ -106,7 +106,7 @@ export function AdminHeader({
           <div className="profile-dropdown-menu">
             <div className="profile-dropdown-header">
               <strong>Ananya Sharma</strong>
-              <span>admin@pmms.gov.in</span>
+              <span>admin@esapmada.gov.in</span>
               <span className="profile-role-badge">
                 <Shield size={11} /> {language === 'hi' ? 'प्रशासक' : 'Administrator'}
               </span>
