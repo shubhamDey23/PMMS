@@ -6,7 +6,6 @@ import {
   Bell,
   CalendarDays,
   ChevronDown,
-  ExternalLink,
   HelpCircle,
   LogOut,
   Menu,
@@ -37,20 +36,6 @@ export function AdminHeader({
       >
         <Menu size={21} />
       </button>
-
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/logo-icon.png"
-        alt="PMMS Logo"
-        className="topbar-icon"
-        width={32}
-        height={32}
-      />
-
-      <div className="portal-title">
-        <strong>{t.portalName}</strong>
-        <span>{t.departmentName}</span>
-      </div>
 
       <div className="global-search">
         <Search size={18} />
@@ -127,14 +112,6 @@ export function AdminHeader({
               </span>
             </div>
             <div className="profile-dropdown-divider" />
-            <Link
-              href="/"
-              className="profile-dropdown-item"
-              onClick={() => setProfileDropdownOpen(false)}
-            >
-              <ExternalLink size={15} />
-              <span>{t.publicPortal}</span>
-            </Link>
             <button
               type="button"
               className="profile-dropdown-item logout"

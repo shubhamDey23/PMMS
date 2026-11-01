@@ -422,7 +422,6 @@ export const navItems: NavItem[] = [
   { label: 'Inspection Management', labelHi: 'निरीक्षण प्रबंधन', icon: Search, href: '/admin/alerts?tab=inspections' },
   { label: 'Project Handover', labelHi: 'परियोजना हस्तांतरण', icon: Handshake, href: '/admin/alerts?tab=handover' },
   { label: 'Reports & Analytics', labelHi: 'रिपोर्ट एवं विश्लेषण', icon: BarChart3, href: '/admin/analytics' },
-  { label: 'Public Dashboard', labelHi: 'सार्वजनिक डैशबोर्ड', icon: Map, href: '/' },
   { label: 'User Management', labelHi: 'उपयोगकर्ता प्रबंधन', icon: Users, href: '/admin/settings?tab=users' },
   { label: 'Settings', labelHi: 'सेटिंग्स', icon: Settings, href: '/admin/settings' },
 ]
