@@ -3,26 +3,27 @@ import Image from 'next/image'
 export function Logo({ compact = false }: { compact?: boolean }) {
   if (compact) {
     return (
-      <div className="brand brand-compact" title="Government Project Monitoring Dashboard">
+      <div className="brand brand-compact" title="ecentric">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/logo-icon.png"
-          alt="PMMS Icon"
+          alt="ecentric Icon"
           className="brand-logo-icon"
-          width={38}
-          height={38}
+          width={36}
+          height={36}
         />
       </div>
     )
   }
 
   return (
-    <div className="brand brand-full">
+    <div className="brand brand-full" title="ecentric">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/logo.png"
-        alt="Government Project Monitoring Dashboard"
+        src="/ecentric-logo.png"
+        alt="ecentric Corporate Services"
         className="brand-logo-full"
+        style={{ height: '36px', width: 'auto', objectFit: 'contain' }}
       />
     </div>
   )

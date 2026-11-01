@@ -304,9 +304,9 @@ export interface TranslationSchema {
 
 export const translations: Record<Language, TranslationSchema> = {
   en: {
-    portalName: 'Project Monitoring & Management System',
-    departmentName: 'Department of Planning & Development',
-    stateGov: 'Government Project Monitoring Portal',
+    portalName: 'ecentric Project Monitoring Portal',
+    departmentName: 'Department of Planning & Infrastructure',
+    stateGov: 'ecentric Corporate Services',
     searchPlaceholder: 'Search projects, IDs, locations, or departments...',
     fy: 'FY 2024–25',
     adminLogin: 'Admin Login',
@@ -606,9 +606,9 @@ export const translations: Record<Language, TranslationSchema> = {
   },
 
   hi: {
-    portalName: 'परियोजना निगरानी एवं प्रबंधन प्रणाली',
-    departmentName: 'योजना एवं विकास विभाग',
-    stateGov: 'शासकीय परियोजना निगरानी पोर्टल',
+    portalName: 'ecentric परियोजना निगरानी पोर्टल',
+    departmentName: 'योजना एवं अवसंरचना विभाग',
+    stateGov: 'ecentric कॉर्पोरेट सर्विसेज',
     searchPlaceholder: 'परियोजना, आईडी, स्थान या विभाग खोजें...',
     fy: 'वित्त वर्ष 2024–25',
     adminLogin: 'प्रशासनिक लॉगिन',

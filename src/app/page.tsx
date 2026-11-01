@@ -20,7 +20,7 @@ import { useTranslation } from '@/context/LanguageContext'
 
 export default function PublicLandingPage() {
   const { t, language, formatCurrency, getLocalizedText } = useTranslation()
-  const [allProjects, setAllProjects] = useState<Project[]>([])
+  const [allProjects, setAllProjects] = useState<Project[]>(() => projectService.listProjects())
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [searchModalOpen, setSearchModalOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')

@@ -3,12 +3,12 @@ import './globals.css'
 import { LanguageProvider } from '@/context/LanguageContext'
 
 export const metadata: Metadata = {
-  title: 'Project Monitoring & Management System',
-  description: 'Government Project Monitoring & Management System — Department of Planning & Development.',
+  title: 'ecentric — Project Monitoring & Management System',
+  description: 'ecentric Corporate Services — Comprehensive Project Monitoring, Geolocation & Management System.',
   icons: {
-    icon: '/favicon.png',
-    shortcut: '/favicon.png',
-    apple: '/favicon.png',
+    icon: '/logo-icon.png',
+    shortcut: '/logo-icon.png',
+    apple: '/logo-icon.png',
   },
 }
 

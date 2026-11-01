@@ -19,7 +19,7 @@ import type { Project } from '@/types/project'
 export default function AdminDashboardPage() {
   const { openProject } = useAdminDrawer()
   const { t, language } = useTranslation()
-  const [projectsList, setProjectsList] = useState<Project[]>([])
+  const [projectsList, setProjectsList] = useState<Project[]>(() => projectService.listProjects())
 
   useEffect(() => {
     setProjectsList(projectService.listProjects())

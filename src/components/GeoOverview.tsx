@@ -31,10 +31,19 @@ export function GeoOverview({
 }) {
   const { t, language, getLocalizedText } = useTranslation()
 
+  const [mapStyle, setMapStyle] = useState<'street' | 'satellite'>('street')
   const [selectedPinProject, setSelectedPinProject] = useState<Project | null>(null)
   const [userLocation, setUserLocation] = useState<UserLocation | null>(null)
   const [geoLoading, setGeoLoading] = useState(false)
   const [geoNotice, setGeoNotice] = useState<{ type: 'info' | 'error'; message: string } | null>(null)
+
+  // Real geographic bounding box of the Ranchi, Jharkhand map tiles (1024x768)
+  const RANCHI_BOUNDS = {
+    minLat: 23.24135,
+    maxLat: 23.48340,
+    minLng: 85.16602,
+    maxLng: 85.51758,
+  }
 
   // Filter projects with valid latitude and longitude
   const geoProjects = projects.filter(
@@ -47,27 +56,12 @@ export function GeoOverview({
 
   const withoutCoordsCount = projects.length - geoProjects.length
 
-  // Calculate bounding box for SVG projection (with fallback defaults)
-  const defaultMinLat = 23.5
-  const defaultMaxLat = 23.9
-  const defaultMinLng = 85.3
-  const defaultMaxLng = 85.7
-
-  const minLat = Math.min(defaultMinLat, ...geoProjects.map((p) => p.location.latitude!))
-  const maxLat = Math.max(defaultMaxLat, ...geoProjects.map((p) => p.location.latitude!))
-  const minLng = Math.min(defaultMinLng, ...geoProjects.map((p) => p.location.longitude!))
-  const maxLng = Math.max(defaultMaxLng, ...geoProjects.map((p) => p.location.longitude!))
-
   const projectToCanvas = (lat: number, lng: number) => {
-    const latSpan = maxLat - minLat || 0.4
-    const lngSpan = maxLng - minLng || 0.4
+    // If coordinate is outside Ranchi bounds, gracefully clamp
+    const x = ((lng - RANCHI_BOUNDS.minLng) / (RANCHI_BOUNDS.maxLng - RANCHI_BOUNDS.minLng)) * 100
+    const y = ((RANCHI_BOUNDS.maxLat - lat) / (RANCHI_BOUNDS.maxLat - RANCHI_BOUNDS.minLat)) * 100
 
-    // X percentage (left to right)
-    const x = ((lng - minLng) / lngSpan) * 80 + 10
-    // Y percentage (top to bottom: higher latitude is higher up, so inverted)
-    const y = 90 - ((lat - minLat) / latSpan) * 80
-
-    return { x: Math.max(8, Math.min(92, x)), y: Math.max(10, Math.min(90, y)) }
+    return { x: Math.max(4, Math.min(96, x)), y: Math.max(6, Math.min(94, y)) }
   }
 
   const handleDetectLocation = () => {
@@ -126,6 +120,45 @@ export function GeoOverview({
         </div>
 
         <div className="geo-header-actions">
+          <div className="geo-map-style-toggle" style={{ display: 'flex', gap: '4px', background: 'var(--bg-muted, #f1f5f9)', padding: '3px', borderRadius: '8px' }}>
+            <button
+              type="button"
+              className={`style-btn ${mapStyle === 'street' ? 'active' : ''}`}
+              onClick={() => setMapStyle('street')}
+              style={{
+                border: 'none',
+                background: mapStyle === 'street' ? '#fff' : 'transparent',
+                fontWeight: mapStyle === 'street' ? 600 : 500,
+                color: mapStyle === 'street' ? '#0f172a' : '#64748b',
+                padding: '4px 10px',
+                borderRadius: '6px',
+                fontSize: '12px',
+                cursor: 'pointer',
+                boxShadow: mapStyle === 'street' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none',
+              }}
+            >
+              🗺️ {language === 'hi' ? 'सड़क मानचित्र' : 'Street Map'}
+            </button>
+            <button
+              type="button"
+              className={`style-btn ${mapStyle === 'satellite' ? 'active' : ''}`}
+              onClick={() => setMapStyle('satellite')}
+              style={{
+                border: 'none',
+                background: mapStyle === 'satellite' ? '#fff' : 'transparent',
+                fontWeight: mapStyle === 'satellite' ? 600 : 500,
+                color: mapStyle === 'satellite' ? '#0f172a' : '#64748b',
+                padding: '4px 10px',
+                borderRadius: '6px',
+                fontSize: '12px',
+                cursor: 'pointer',
+                boxShadow: mapStyle === 'satellite' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none',
+              }}
+            >
+              🛰️ {language === 'hi' ? 'सैटेलाइट' : 'Satellite'}
+            </button>
+          </div>
+
           <div className="geo-stat-pills">
             <span className="pill green">
               <strong>{geoProjects.length}</strong> {t.geo.projectsWithCoords}
@@ -164,12 +197,22 @@ export function GeoOverview({
         </div>
       )}
 
-      {/* Interactive Map Visual with real Coordinate Pins */}
-      <div className="geo-canvas">
-        <div className="geo-grid-overlay" />
-        <div className="geo-boundary-shape">
-          DISTRICT GEOGRAPHIC JURISDICTION
-          <small>Verified Territorial Sector Coordinates</small>
+      {/* Interactive Map Visual with real Ranchi, Jharkhand Map Image & Coordinate Pins */}
+      <div
+        className={`geo-canvas real-map-${mapStyle}`}
+        style={{
+          backgroundImage: `url(${mapStyle === 'street' ? '/ranchi-map.jpg' : '/ranchi-satellite.jpg'})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          position: 'relative',
+        }}
+      >
+        <div className="geo-grid-overlay" style={{ opacity: mapStyle === 'street' ? 0.08 : 0.15 }} />
+        <div className="geo-boundary-shape" style={{ background: 'rgba(15, 23, 42, 0.78)', backdropFilter: 'blur(4px)', color: '#fff', border: '1px solid rgba(255,255,255,0.18)', borderRadius: '8px', padding: '6px 12px' }}>
+          📍 RANCHI, JHARKHAND — DEVELOPMENT CORRIDOR
+          <small style={{ color: '#94a3b8', display: 'block', fontSize: '11px', marginTop: '2px' }}>
+            Lat: 23.24°N – 23.48°N | Lon: 85.16°E – 85.52°E
+          </small>
         </div>
 
         {/* Project pins based on actual coordinates */}

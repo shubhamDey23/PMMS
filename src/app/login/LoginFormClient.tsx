@@ -6,6 +6,7 @@ import {
   AlertCircle,
   ArrowLeft,
   CheckCircle2,
+  ChevronRight,
   Copy,
   Eye,
   EyeOff,
@@ -89,184 +90,236 @@ export function LoginFormClient({ initialNextUrl }: { initialNextUrl: string }) 
   }
 
   return (
-    <div className="login-card">
-      <div className="login-card-head">
-        <Link href="/" className="login-brand" title="PMMS Homepage">
+    <div className="ecentric-login-layout">
+      {/* Top bar with ecentric logo and back to home */}
+      <div className="login-top-nav">
+        <Link href="/" className="login-nav-logo" title="ecentric Portal">
           <Logo />
         </Link>
-        <span className="login-badge">
-          <ShieldCheck size={14} /> Official Admin Gateway
-        </span>
-        <h1 className="login-title">Admin Login</h1>
-        <p className="login-subtitle">
-          Sign in to manage and monitor government development projects.
-        </p>
+        <Link href="/" className="login-nav-back">
+          <ArrowLeft size={16} />
+          <span>Public Portal</span>
+        </Link>
       </div>
 
-      {serverError && (
-        <div className="login-error-banner" role="alert">
-          <AlertCircle size={18} />
-          <div>
-            <strong>Authentication Error</strong>
-            <p>{serverError}</p>
+      <div className="ecentric-login-body">
+        {/* Left Side: Welcome Hero Copy matching screenshot */}
+        <div className="ecentric-login-hero">
+          <div className="hero-text-block">
+            <h1 className="hero-heading">Welcome to ecentric</h1>
+            <p className="hero-description">
+              An online monitoring system, End to End AI &amp; Blockchain based Portal for Monitoring
+              all the Inventories Supplied, Raising Complaints &amp; Suggesting better Vendors/Suppliers.
+            </p>
           </div>
         </div>
-      )}
 
-      <form onSubmit={handleSubmit} className="login-form" noValidate>
-        {/* Username Field */}
-        <div className={`form-group ${fieldErrors.username ? 'has-error' : ''}`}>
-          <label htmlFor="username">Username</label>
-          <div className="input-affix-wrap">
-            <span className="input-icon">
-              <UserRound size={17} />
-            </span>
-            <input
-              id="username"
-              type="text"
-              autoComplete="username"
-              autoFocus
-              disabled={isPending}
-              placeholder="Enter admin username"
-              value={username}
-              onChange={(e) => {
-                setUsername(e.target.value)
-                if (fieldErrors.username) {
-                  setFieldErrors((prev) => ({ ...prev, username: undefined }))
-                }
-              }}
-              className={fieldErrors.username ? 'input-error' : ''}
-            />
-          </div>
-          {fieldErrors.username && (
-            <span className="field-error-msg">{fieldErrors.username}</span>
-          )}
-        </div>
-
-        {/* Password Field */}
-        <div className={`form-group ${fieldErrors.password ? 'has-error' : ''}`}>
-          <label htmlFor="password">Password</label>
-          <div className="input-affix-wrap">
-            <span className="input-icon">
-              <Lock size={17} />
-            </span>
-            <input
-              id="password"
-              type={showPassword ? 'text' : 'password'}
-              autoComplete="current-password"
-              disabled={isPending}
-              placeholder="Enter admin password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value)
-                if (fieldErrors.password) {
-                  setFieldErrors((prev) => ({ ...prev, password: undefined }))
-                }
-              }}
-              className={fieldErrors.password ? 'input-error' : ''}
-            />
-            <button
-              type="button"
-              className="password-toggle-btn"
-              onClick={() => setShowPassword(!showPassword)}
-              aria-label={showPassword ? 'Hide password' : 'Show password'}
-              tabIndex={-1}
-            >
-              {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-            </button>
-          </div>
-          {fieldErrors.password && (
-            <span className="field-error-msg">{fieldErrors.password}</span>
-          )}
-        </div>
-
-        {/* Remember Me Checkbox */}
-        <div className="login-options-row">
-          <label className="remember-me-checkbox">
-            <input
-              type="checkbox"
-              checked={rememberMe}
-              onChange={(e) => setRememberMe(e.target.checked)}
-              disabled={isPending}
-            />
-            <span>Remember me for 30 days</span>
-          </label>
-        </div>
-
-        {/* Submit Button */}
-        <button
-          type="submit"
-          className="login-submit-btn"
-          disabled={isPending}
-        >
-          {isPending ? (
-            <>
-              <Loader2 size={18} className="spinner-icon" />
-              <span>Verifying credentials...</span>
-            </>
-          ) : (
-            <>
-              <KeyRound size={17} />
-              <span>Sign In to Dashboard</span>
-            </>
-          )}
-        </button>
-      </form>
-
-      {/* Development Demo Credentials - Dev mode only */}
-      {isDevMode && (
-        <div className="demo-credentials-box">
-          <div className="demo-credentials-header">
-            <div className="demo-badge">Development Demo Credentials</div>
-            <button
-              type="button"
-              className="demo-fill-btn"
-              onClick={handleFillDemo}
-              title="Auto-fill form with demo credentials"
-            >
-              Auto-fill Form
-            </button>
-          </div>
-          <p className="demo-note">
-            Use these credentials for local testing. This card is hidden in production builds.
-          </p>
-          <div className="demo-credentials-grid">
-            <div className="demo-cred-row">
-              <span className="demo-label">Username:</span>
-              <code className="demo-val">admin</code>
-              <button
-                type="button"
-                className="demo-copy-btn"
-                onClick={() => handleCopy('admin', 'user')}
-                title="Copy username"
-              >
-                {copiedField === 'user' ? <CheckCircle2 size={13} className="text-green" /> : <Copy size={13} />}
-              </button>
+        {/* Right Side: Floating Login Card matching screenshot */}
+        <div className="ecentric-login-card-wrap">
+          <div className="ecentric-login-card">
+            {/* Header prompt inside card */}
+            <div className="card-top-header">
+              <span className="card-admin-tag">
+                <ShieldCheck size={14} /> Admin Login
+              </span>
+              <p className="card-lead-text">
+                Login now to access real-time insights and keep operations running smoothly.
+              </p>
             </div>
-            <div className="demo-cred-row">
-              <span className="demo-label">Password:</span>
-              <code className="demo-val">Admin@12345</code>
+
+            {serverError && (
+              <div className="login-error-banner" role="alert">
+                <AlertCircle size={18} />
+                <div>
+                  <strong>Authentication Error</strong>
+                  <p>{serverError}</p>
+                </div>
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="ecentric-form" noValidate>
+              {/* Username Input with pill border and user icon */}
+              <div className={`pill-input-group ${fieldErrors.username ? 'has-error' : ''}`}>
+                <label htmlFor="username" className="sr-only">
+                  Username
+                </label>
+                <div className="pill-input-affix">
+                  <span className="pill-icon">
+                    <UserRound size={19} />
+                  </span>
+                  <input
+                    id="username"
+                    type="text"
+                    autoComplete="username"
+                    autoFocus
+                    disabled={isPending}
+                    placeholder="User Name / E-mail"
+                    value={username}
+                    onChange={(e) => {
+                      setUsername(e.target.value)
+                      if (fieldErrors.username) {
+                        setFieldErrors((prev) => ({ ...prev, username: undefined }))
+                      }
+                    }}
+                    className={fieldErrors.username ? 'input-error' : ''}
+                  />
+                </div>
+                {fieldErrors.username && (
+                  <span className="field-error-msg">{fieldErrors.username}</span>
+                )}
+              </div>
+
+              {/* Password Input with pill border and key icon */}
+              <div className={`pill-input-group ${fieldErrors.password ? 'has-error' : ''}`}>
+                <label htmlFor="password" className="sr-only">
+                  Password
+                </label>
+                <div className="pill-input-affix">
+                  <span className="pill-icon">
+                    <KeyRound size={19} />
+                  </span>
+                  <input
+                    id="password"
+                    type={showPassword ? 'text' : 'password'}
+                    autoComplete="current-password"
+                    disabled={isPending}
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => {
+                      setPassword(e.target.value)
+                      if (fieldErrors.password) {
+                        setFieldErrors((prev) => ({ ...prev, password: undefined }))
+                      }
+                    }}
+                    className={fieldErrors.password ? 'input-error' : ''}
+                  />
+                  <button
+                    type="button"
+                    className="password-toggle-btn"
+                    onClick={() => setShowPassword(!showPassword)}
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    tabIndex={-1}
+                  >
+                    {showPassword ? <EyeOff size={17} /> : <Eye size={17} />}
+                  </button>
+                </div>
+                {fieldErrors.password && (
+                  <span className="field-error-msg">{fieldErrors.password}</span>
+                )}
+              </div>
+
+              {/* Options Row: Remember Me & Forgot Password */}
+              <div className="ecentric-options-row">
+                <label className="remember-checkbox-label">
+                  <input
+                    type="checkbox"
+                    checked={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.checked)}
+                    disabled={isPending}
+                  />
+                  <span>Remember me</span>
+                </label>
+
+                <a
+                  href="#forgot-password"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    alert('Please contact your ecentric system administrator to reset your credentials.')
+                  }}
+                  className="forgot-password-link"
+                >
+                  Forgot Password?
+                </a>
+              </div>
+
+              {/* Green Capsule Login Button with chevron */}
               <button
-                type="button"
-                className="demo-copy-btn"
-                onClick={() => handleCopy('Admin@12345', 'pass')}
-                title="Copy password"
+                type="submit"
+                className="ecentric-login-btn"
+                disabled={isPending}
               >
-                {copiedField === 'pass' ? <CheckCircle2 size={13} className="text-green" /> : <Copy size={13} />}
+                {isPending ? (
+                  <>
+                    <Loader2 size={18} className="spinner-icon" />
+                    <span>Verifying...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Login</span>
+                    <ChevronRight size={19} />
+                  </>
+                )}
               </button>
-            </div>
+
+              {/* Don't have an account yet? */}
+              <div className="card-signup-row">
+                <span>Don’t have an account yet?</span>{' '}
+                <a
+                  href="#signup"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    alert('Officer registration is managed through the ecentric administrative portal. Contact your department administrator.')
+                  }}
+                  className="signup-link"
+                >
+                  Sign up
+                </a>
+              </div>
+            </form>
+
+            {/* Development Demo Credentials - Visible only in dev mode */}
+            {isDevMode && (
+              <div className="demo-credentials-box">
+                <div className="demo-credentials-header">
+                  <div className="demo-badge">Development Demo Credentials</div>
+                  <button
+                    type="button"
+                    className="demo-fill-btn"
+                    onClick={handleFillDemo}
+                    title="Auto-fill form with demo credentials"
+                  >
+                    Auto-fill Form
+                  </button>
+                </div>
+                <div className="demo-credentials-grid">
+                  <div className="demo-cred-row">
+                    <span className="demo-label">Username:</span>
+                    <code className="demo-val">admin</code>
+                    <button
+                      type="button"
+                      className="demo-copy-btn"
+                      onClick={() => handleCopy('admin', 'user')}
+                      title="Copy username"
+                    >
+                      {copiedField === 'user' ? (
+                        <CheckCircle2 size={13} className="text-green" />
+                      ) : (
+                        <Copy size={13} />
+                      )}
+                    </button>
+                  </div>
+                  <div className="demo-cred-row">
+                    <span className="demo-label">Password:</span>
+                    <code className="demo-val">Admin@12345</code>
+                    <button
+                      type="button"
+                      className="demo-copy-btn"
+                      onClick={() => handleCopy('Admin@12345', 'pass')}
+                      title="Copy password"
+                    >
+                      {copiedField === 'pass' ? (
+                        <CheckCircle2 size={13} className="text-green" />
+                      ) : (
+                        <Copy size={13} />
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
-      )}
-
-      {/* Return to Public Landing Page */}
-      <div className="login-footer">
-        <Link href="/" className="back-link">
-          <ArrowLeft size={16} />
-          <span>Return to Public Dashboard</span>
-        </Link>
       </div>
     </div>
   )
 }
-
