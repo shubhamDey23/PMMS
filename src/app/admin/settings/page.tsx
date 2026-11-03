@@ -15,8 +15,10 @@ import {
   UserCheck,
   Users,
   Wrench,
+  Palette,
 } from 'lucide-react'
 import { PageIntro } from '@/components/PageIntro'
+import { ThemeSelector } from '@/components/ThemeSelector'
 import { useTranslation } from '@/context/LanguageContext'
 import { dmftDatabase } from '@/lib/services/dmft-database.service'
 import type { DMFTUserRole } from '@/types/dmft'
@@ -26,7 +28,7 @@ export default function AdminSettingsPage() {
   const users = useMemo(() => dmftDatabase.getUsers(), [])
   const auditLogs = useMemo(() => dmftDatabase.getAuditLogs(), [])
 
-  const [activeTab, setActiveTab] = useState<'users' | 'matrix' | 'audit' | 'security'>('users')
+  const [activeTab, setActiveTab] = useState<'users' | 'matrix' | 'audit' | 'security' | 'theme'>('theme')
 
   const permissionsMatrix: Array<{
     module: string
@@ -218,6 +220,14 @@ export default function AdminSettingsPage() {
       <div className="segmented" style={{ marginBottom: '20px', width: 'fit-content' }}>
         <button
           type="button"
+          className={activeTab === 'theme' ? 'active' : ''}
+          onClick={() => setActiveTab('theme')}
+        >
+          <Palette size={15} style={{ display: 'inline', marginRight: '6px' }} />
+          <span>{language === 'hi' ? 'थीम एवं उपस्थिति' : 'Theme Appearance'}</span>
+        </button>
+        <button
+          type="button"
           className={activeTab === 'users' ? 'active' : ''}
           onClick={() => setActiveTab('users')}
         >
@@ -249,6 +259,13 @@ export default function AdminSettingsPage() {
           <span>{language === 'hi' ? 'सुरक्षा एवं 2FA' : 'Security & 2FA'}</span>
         </button>
       </div>
+
+      {/* TAB 0: THEME APPEARANCE */}
+      {activeTab === 'theme' && (
+        <div className="card" style={{ padding: '24px' }}>
+          <ThemeSelector />
+        </div>
+      )}
 
       {/* TAB 1: USERS LIST */}
       {activeTab === 'users' && (

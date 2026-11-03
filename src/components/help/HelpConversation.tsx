@@ -78,9 +78,30 @@ export function HelpConversation({
               }}
             />
             <span style={{ fontSize: '12px', fontWeight: 600, color: '#334155' }}>
-              DMFT AI Assistant
+              DMFT Knowledge & Help Desk
             </span>
           </div>
+          <Link
+            href="/admin/ai-assistant"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '4px 10px',
+              borderRadius: '6px',
+              background: '#eff6ff',
+              border: '1px solid #bfdbfe',
+              color: '#1d4ed8',
+              fontSize: '11px',
+              fontWeight: 600,
+              textDecoration: 'none',
+              marginLeft: '8px',
+            }}
+          >
+            <Sparkles size={12} color="#f59e0b" />
+            <span>{language === 'hi' ? 'लाइव जेमिनी एआई चैट' : 'Open Gemini AI Chat'}</span>
+            <ArrowRight size={12} />
+          </Link>
         </div>
 
         <button

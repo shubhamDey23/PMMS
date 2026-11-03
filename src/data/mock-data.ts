@@ -9,11 +9,13 @@ import {
   FileText,
   FolderKanban,
   Handshake,
+  HelpCircle,
   LayoutDashboard,
   Map,
   MapPin,
   Search,
   Settings,
+  Sparkles,
   Users,
   Wallet,
 } from 'lucide-react'
@@ -425,7 +427,8 @@ export const navItems: NavItem[] = [
   { label: 'Work Progress', labelHi: 'कार्य प्रगति', icon: BarChart3, href: '/admin/analytics' },
   { label: 'Project Handover', labelHi: 'परियोजना हस्तांतरण', icon: Handshake, href: '/admin/handover' },
   { label: 'Reports & MIS', labelHi: 'रिपोर्ट्स एवं एमआईएस', icon: FileText, href: '/admin/reports' },
-  { label: 'Ask DMFT AI', labelHi: 'पूछें डीएमएफटी एआई', icon: Bot, href: '/admin/help' },
+  { label: 'Help Assistant', labelHi: 'सहायता सहायक', icon: HelpCircle, href: '/admin/help' },
+  { label: 'AI Assistant', labelHi: 'एआई सहायक', icon: Sparkles, href: '/admin/ai-assistant' },
   { label: 'User Roles & Settings', labelHi: 'उपयोगकर्ता एवं सेटिंग्स', icon: Settings, href: '/admin/settings' },
 ]
 

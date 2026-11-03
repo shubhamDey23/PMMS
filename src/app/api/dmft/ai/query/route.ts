@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { dmftDatabase } from '@/lib/services/dmft-database.service'
+import { retrieveKnowledgeChunks, formatRetrievedContext } from '@/lib/ai/rag-engine'
 
 export interface AIQueryResponse {
   query: string
@@ -66,22 +67,7 @@ export async function POST(request: Request) {
         provider: 'local-dmft-nlp-grounded',
       }
     }
-    // 3. "Which projects are pending for administrative approval?"
-    else if (qLower.includes('administrative approval') || qLower.includes('pending approval') || qLower.includes('प्रशासनिक स्वीकृति')) {
-      const pendingAS = pendency.filter((p) => p.checkpoint.includes('Administrative Approval'))
-      response = {
-        query,
-        intent: 'pending_administrative_approvals',
-        answerEn: `There are ${pendingAS.length} project(s) currently awaiting Administrative Sanction (AS) from the DMFT Governing Council / Deputy Commissioner's office.`,
-        answerHi: `वर्तमान में डीएमएफटी शासी निकाय / उपायुक्त कार्यालय स्तर पर कुल ${pendingAS.length} परियोजनाएं प्रशासनिक स्वीकृति (AS) हेतु प्रतीक्षारत हैं।`,
-        dataPoints: pendingAS,
-        deepLink: '/admin/alerts',
-        deepLinkText: 'Open AS Approval Queue',
-        deepLinkTextHi: 'प्रशासनिक स्वीकृति कतार खोलें',
-        provider: 'local-dmft-nlp-grounded',
-      }
-    }
-    // 4. "Which department has the highest number of delayed projects?"
+    // 3. "Which department has the highest number of delayed projects?"
     else if (qLower.includes('highest number of delayed') || qLower.includes('most delayed') || qLower.includes('सर्वाधिक विलंबित')) {
       response = {
         query,
@@ -94,7 +80,7 @@ export async function POST(request: Request) {
         provider: 'local-dmft-nlp-grounded',
       }
     }
-    // 5. "Show projects where physical progress is below 30%"
+    // 4. "Show projects where physical progress is below 30%"
     else if (qLower.includes('below 30') || qLower.includes('30%') || qLower.includes('कम प्रगति')) {
       const slow = projects.filter((p) => p.physicalProgress < 30)
       response = {
@@ -109,30 +95,37 @@ export async function POST(request: Request) {
         provider: 'local-dmft-nlp-grounded',
       }
     }
-    // 6. "Generate monthly DMFT project status report"
-    else if (qLower.includes('monthly') || qLower.includes('report') || qLower.includes('प्रतिवेदन') || qLower.includes('रिपोर्ट')) {
-      response = {
-        query,
-        intent: 'monthly_report_generation',
-        answerEn: `Generated DMFT Ramgarh Monthly Progress Summary for FY 2024–25. Total Approved: ₹${(kpis.totalApprovedCost / 10000000).toFixed(2)} Cr, Total Disbursed: ₹${(kpis.totalExpenditure / 10000000).toFixed(2)} Cr, Expenditure Utilization: ${kpis.overallUtilization}%. Available balance: ₹${(kpis.totalAvailableBalance / 10000000).toFixed(2)} Cr.`,
-        answerHi: `वित्तीय वर्ष 2024-25 हेतु डीएमएफटी रामगढ़ मासिक प्रगति सारांश तैयार किया गया। कुल स्वीकृत: ₹${(kpis.totalApprovedCost / 10000000).toFixed(2)} करोड़, कुल व्यय: ₹${(kpis.totalExpenditure / 10000000).toFixed(2)} करोड़, उपयोगिता दर: ${kpis.overallUtilization}%। शेष राशि: ₹${(kpis.totalAvailableBalance / 10000000).toFixed(2)} करोड़।`,
-        deepLink: '/admin/reports?type=executive-summary',
-        deepLinkText: 'Download Complete MIS Report',
-        deepLinkTextHi: 'पूर्ण एमआईएस रिपोर्ट डाउनलोड करें',
-        provider: 'local-dmft-nlp-grounded',
-      }
-    }
-    // Default fallback grounded intelligence
+    // 5. Intelligent RAG Knowledge Retrieval over DFMT Documentation
     else {
-      response = {
-        query,
-        intent: 'general_district_status',
-        answerEn: `DMFT Ramgarh Portal currently monitors ${projects.length} verified projects across Mandu, Patratu, Ramgarh, Gola, Chitarpur, and Dulmi. ${kpis.completed} completed, ${kpis.ongoing} ongoing, and ${kpis.delayed} delayed. Total fund allocation stands at ₹${(kpis.totalApprovedCost / 10000000).toFixed(2)} Cr with ${kpis.overallUtilization}% expenditure utilization.`,
-        answerHi: `डीएमएफटी रामगढ़ पोर्टल मांडू, पतरातू, रामगढ़, गोला, चितरपुर एवं दुलमी में कुल ${projects.length} सत्यापित योजनाओं की निगरानी कर रहा है। ${kpis.completed} पूर्ण, ${kpis.ongoing} चालू, एवं ${kpis.delayed} विलंबित हैं। कुल स्वीकृत राशि ₹${(kpis.totalApprovedCost / 10000000).toFixed(2)} करोड़ तथा व्यय उपयोगिता दर ${kpis.overallUtilization}% है।`,
-        deepLink: '/admin',
-        deepLinkText: 'Return to Executive Dashboard',
-        deepLinkTextHi: 'कार्यकारी डैशबोर्ड पर जाएं',
-        provider: 'local-dmft-nlp-grounded',
+      const ragResults = retrieveKnowledgeChunks(query, 3)
+
+      if (ragResults.length > 0) {
+        const topChunk = ragResults[0].chunk
+        const { sources } = formatRetrievedContext(ragResults)
+        const citationsList = sources.map(s => s.source).join(', ')
+
+        response = {
+          query,
+          intent: `rag_retrieval_${topChunk.id.toLowerCase()}`,
+          answerEn: `${topChunk.contentEn}\n\n[Verified Reference: ${citationsList}]`,
+          answerHi: `${topChunk.contentHi}\n\n[सत्यापित संदर्भ: ${citationsList}]`,
+          dataPoints: sources,
+          deepLink: '/admin/ai-assistant',
+          deepLinkText: 'Open Full Conversational AI Chat',
+          deepLinkTextHi: 'पूर्ण संवादात्मक एआई चैट खोलें',
+          provider: 'local-dmft-nlp-grounded',
+        }
+      } else {
+        response = {
+          query,
+          intent: 'general_district_status',
+          answerEn: `DMFT Ramgarh Portal currently monitors ${projects.length} verified projects across Mandu, Patratu, Ramgarh, Gola, Chitarpur, and Dulmi. ${kpis.completed} completed, ${kpis.ongoing} ongoing, and ${kpis.delayed} delayed. Total fund allocation stands at ₹${(kpis.totalApprovedCost / 10000000).toFixed(2)} Cr with ${kpis.overallUtilization}% expenditure utilization. For detailed procedural queries, ask our live Gemini AI Assistant.`,
+          answerHi: `डीएमएफटी रामगढ़ पोर्टल मांडू, पतरातू, रामगढ़, गोला, चितरपुर एवं दुलमी में कुल ${projects.length} सत्यापित योजनाओं की निगरानी कर रहा है। विस्तृत प्रक्रियात्मक प्रश्नों के लिए कृपया हमारे लाइव जेमिनी एआई सहायक से पूछें।`,
+          deepLink: '/admin/ai-assistant',
+          deepLinkText: 'Ask Gemini AI Assistant',
+          deepLinkTextHi: 'जेमिनी एआई सहायक से पूछें',
+          provider: 'local-dmft-nlp-grounded',
+        }
       }
     }
 
@@ -147,4 +140,3 @@ export async function POST(request: Request) {
     )
   }
 }
-

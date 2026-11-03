@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "lastIndexedAt": "2026-11-03T17:57:44.519Z",
+  "totalDocuments": 1,
+  "totalChunks": 0,
+  "documents": [
+    {
+      "id": "DOC-DFMT-RFP-001",
+      "fileName": "DFMT.pdf",
+      "filePath": "knowledge-base/DFMT.pdf",
+      "fileHash": "9a217099beb1470562fdcc9d7e337f8327909b863002994a3a6d39ebd3f2d886",
+      "title": "Request for Proposal for Development and Maintenance of DMFT Work Monitoring Portal, Ramgarh, Jharkhand",
+      "authority": "Office of the Deputy Commissioner-cum-District Magistrate, Ramgarh",
+      "totalPages": 27,
+      "chunksCount": 15,
+      "ingestedAt": "2026-11-03T16:02:18.471Z",
+      "status": "active"
+    }
+  ]
+}

@@ -16,6 +16,7 @@ import {
   User,
 } from 'lucide-react'
 import { LanguageSwitch } from './LanguageSwitch'
+import { ThemeSelector } from './ThemeSelector'
 import { useTranslation } from '@/context/LanguageContext'
 import { dmftDatabase } from '@/lib/services/dmft-database.service'
 
@@ -73,6 +74,20 @@ export function AdminHeader({
 
       {/* Bilingual Language Switcher in Header */}
       <LanguageSwitch compact />
+
+      {/* Dynamic Theme Switcher */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          padding: '4px 8px',
+          borderRadius: '8px',
+          border: '1px solid var(--line)',
+          background: 'var(--color-surface)',
+        }}
+      >
+        <ThemeSelector compact />
+      </div>
 
       <Link
         href="/admin/help"

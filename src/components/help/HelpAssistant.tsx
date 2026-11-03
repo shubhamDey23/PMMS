@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useMemo } from 'react'
+import Link from 'next/link'
 import {
   Search,
   Bot,
@@ -141,6 +142,64 @@ export function HelpAssistant() {
 
   return (
     <div className="help-page-shell">
+      {/* Live AI Assistant Banner */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '12px 18px',
+          background: 'linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%)',
+          border: '1px solid #bfdbfe',
+          borderRadius: '12px',
+          marginBottom: '16px',
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div
+            style={{
+              width: '34px',
+              height: '34px',
+              borderRadius: '8px',
+              background: '#2563eb',
+              color: '#ffffff',
+              display: 'grid',
+              placeItems: 'center',
+              flexShrink: 0,
+            }}
+          >
+            <Sparkles size={18} />
+          </div>
+          <div>
+            <div style={{ fontSize: '13px', fontWeight: 700, color: '#1e3a8a' }}>
+              {language === 'hi' ? 'नया: लाइव जेमिनी एआई चैटबॉट उपलब्ध है' : 'New: Live Gemini AI Assistant Available'}
+            </div>
+            <div style={{ fontSize: '11.5px', color: '#475569' }}>
+              {language === 'hi'
+                ? 'DFMT.pdf ज्ञानकोश, लाइव आरएजी और संवादात्मक चैट के लिए नया एआई सहायक उपयोग करें।'
+                : 'Ask questions with live Gemini AI streaming, full conversational memory, and verified DFMT.pdf citations.'}
+            </div>
+          </div>
+        </div>
+        <Link
+          href="/admin/ai-assistant"
+          className="primary-btn"
+          style={{
+            fontSize: '11.5px',
+            padding: '7px 14px',
+            whiteSpace: 'nowrap',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            textDecoration: 'none',
+          }}
+        >
+          <Sparkles size={13} />
+          <span>{language === 'hi' ? 'एआई सहायक खोलें' : 'Open AI Assistant'}</span>
+          <ArrowRight size={13} />
+        </Link>
+      </div>
+
       {/* Hero Search Section */}
       <div className="help-hero-card">
         <div className="help-hero-badge">
