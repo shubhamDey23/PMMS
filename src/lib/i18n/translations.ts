@@ -304,9 +304,9 @@ export interface TranslationSchema {
 
 export const translations: Record<Language, TranslationSchema> = {
   en: {
-    portalName: 'eSapmada by Eccentric',
-    departmentName: 'Department of Planning & Infrastructure',
-    stateGov: 'eSapmada by Eccentric',
+    portalName: 'DMFT Work Monitoring Portal — Ramgarh',
+    departmentName: 'District Mineral Foundation Trust (DMFT), Ramgarh',
+    stateGov: 'District Administration Ramgarh | Government of Jharkhand',
     searchPlaceholder: 'Search projects, IDs, locations, or departments...',
     fy: 'FY 2024–25',
     adminLogin: 'Admin Login',
@@ -606,9 +606,9 @@ export const translations: Record<Language, TranslationSchema> = {
   },
 
   hi: {
-    portalName: 'eSapmada by Eccentric — परियोजना निगरानी पोर्टल',
-    departmentName: 'योजना एवं अवसंरचना विभाग',
-    stateGov: 'eSapmada by Eccentric',
+    portalName: 'डीएमएफटी कार्य निगरानी पोर्टल — रामगढ़',
+    departmentName: 'जिला खनिज फाउंडेशन ट्रस्ट (डीएमएफटी), रामगढ़',
+    stateGov: 'जिला प्रशासन रामगढ़ | झारखण्ड सरकार',
     searchPlaceholder: 'परियोजना, आईडी, स्थान या विभाग खोजें...',
     fy: 'वित्त वर्ष 2024–25',
     adminLogin: 'प्रशासनिक लॉगिन',

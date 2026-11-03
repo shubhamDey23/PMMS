@@ -80,8 +80,8 @@ export default function PublicLandingPage() {
           </h1>
           <p>
             {language === 'hi'
-              ? 'प्रत्येक प्रखंड और गाँव में विकास कार्यों के लिए सत्यापित प्रगति, सार्वजनिक निवेश और पूर्णता अद्यतन देखें।'
-              : 'Explore verified progress, public investment and completion updates for development work across every block and village.'}
+              ? 'रामगढ़ जिले के सभी 6 प्रखंडों एवं ग्रामों में डीएमएफटी विकास कार्यों की सत्यापित प्रगति, सार्वजनिक निवेश एवं पूर्णता अद्यतन देखें।'
+              : 'Explore verified progress, public investment and completion updates for DMFT development works across all 6 blocks and villages of Ramgarh District.'}
           </p>
           <div>
             <button
@@ -143,11 +143,11 @@ export default function PublicLandingPage() {
 
         <section id="featured-projects">
           <SectionHeader
-            title={language === 'hi' ? 'विशेष सार्वजनिक परियोजनाएँ' : 'Featured public projects'}
+            title={language === 'hi' ? 'विशेष डीएमएफटी परियोजनाएँ' : 'Featured DMFT Projects'}
             subtitle={
               language === 'hi'
-                ? 'राज्य भर से हाल ही में अद्यतन की गई मुख्य विकास परियोजनाएँ'
-                : 'Recently updated projects from across the state'
+                ? 'रामगढ़ जिले के खनन प्रभावित एवं लक्षित प्रखंडों की प्रमुख विकास परियोजनाएँ'
+                : 'Priority development projects from mining-affected and key blocks of Ramgarh District'
             }
             action={
               <button

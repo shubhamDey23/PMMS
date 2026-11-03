@@ -111,13 +111,18 @@ export function AdminSidebar({
 
         <div className="sidebar-foot">
           {!collapsed && (
-            <div className="support-card">
+            <Link
+              href="/admin/help"
+              className="support-card"
+              onClick={closeMobile}
+              style={{ textDecoration: 'none', color: 'inherit', display: 'flex' }}
+            >
               <HelpCircle size={19} />
               <div>
-                <strong>{language === 'hi' ? 'सहायता चाहिए?' : 'Need assistance?'}</strong>
-                <span>{language === 'hi' ? 'eSapmada हेल्पडेस्क से संपर्क करें' : 'Contact eSapmada helpdesk'}</span>
+                <strong>{language === 'hi' ? 'पूछें DMFT AI' : 'Ask DMFT AI'}</strong>
+                <span>{language === 'hi' ? 'परियोजना इंटेलिजेंस एवं सहायता' : 'DMFT Ramgarh Helpdesk'}</span>
               </div>
-            </div>
+            </Link>
           )}
 
           {/* Quick logout button in sidebar */}

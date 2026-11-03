@@ -22,6 +22,7 @@ import { Status } from '@/components/Status'
 import { useAdminDrawer } from '@/context/AdminDrawerContext'
 import { useTranslation } from '@/context/LanguageContext'
 import { projectService } from '@/lib/services/project.service'
+import { dmftDatabase } from '@/lib/services/dmft-database.service'
 import type { Project } from '@/types/project'
 
 export default function ProjectHandoverPage() {
@@ -48,6 +49,20 @@ export default function ProjectHandoverPage() {
   const departments = ['all', ...Array.from(new Set(allProjects.map((p) => p.department)))]
 
   const handleSignHandover = (projectId: string) => {
+    const adminUser = dmftDatabase.getUsers()[0]
+    try {
+      dmftDatabase.moveFile(
+        projectId,
+        'Approve',
+        'End-User Department (O&M Cell)',
+        'Concerned Line Dept',
+        'Final joint inspection certified and handover certificate executed.',
+        adminUser,
+        'Stage 10: Handover & Commissioning'
+      )
+    } catch (e) {
+      console.warn('Handover update notice:', e)
+    }
     setHandoverSuccessId(projectId)
     setTimeout(() => setHandoverSuccessId(null), 4000)
   }
@@ -55,7 +70,7 @@ export default function ProjectHandoverPage() {
   return (
     <>
       <PageIntro
-        eyebrow={language === 'hi' ? 'eSapmada by Eccentric / कमीशनिंग' : 'eSapmada by Eccentric / Commissioning'}
+        eyebrow={language === 'hi' ? 'डीएमएफटी रामगढ़ / कमीशनिंग (चरण 10)' : 'DMFT Ramgarh / Commissioning (Stage 10)'}
         title={language === 'hi' ? 'परियोजना हस्तांतरण एवं संपत्ति अंतरण' : 'Project Handover & Asset Transfer'}
         subtitle={
           language === 'hi'

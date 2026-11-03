@@ -57,17 +57,17 @@ export function HelpAssistant() {
     return helpCategories.find((c) => c.id === selectedCategoryId) || null
   }, [selectedCategoryId])
 
-  // Suggested questions (curated popular questions)
+  // Suggested questions (curated popular questions & RFP AI queries)
   const suggestedQuestions = useMemo(() => {
     const ids = [
-      'faq-how-to-navigate',
-      'faq-how-to-add-project',
-      'faq-how-to-open-map',
-      'faq-how-to-view-project-details',
-      'faq-language-toggle',
-      'faq-how-to-filter-handover',
-      'faq-financial-utilization',
-      'faq-missing-coordinates',
+      'ai-how-many-under-execution',
+      'ai-delayed-in-mandu',
+      'ai-pending-administrative-approval',
+      'ai-department-delayed',
+      'ai-physical-progress-below-30',
+      'ai-generate-monthly-report',
+      'ai-summarize-district-status',
+      'faq-10-lifecycle-stages',
     ]
     return ids
       .map((id) => helpQuestions.find((q) => q.id === id))
@@ -87,6 +87,50 @@ export function HelpAssistant() {
     ])
   }
 
+  const handleAskCustomQuery = async (queryToAsk: string) => {
+    if (!queryToAsk.trim()) return
+    const now = new Date()
+    const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+
+    try {
+      const res = await fetch('/api/dmft/ai/query', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query: queryToAsk }),
+      })
+      const data = await res.json()
+      if (data.success && data.result) {
+        const aiQ: HelpQuestion = {
+          id: `ai-${Date.now()}`,
+          categoryId: 'dmft-ai',
+          questionEn: queryToAsk,
+          questionHi: queryToAsk,
+          answerEn: data.result.answerEn,
+          answerHi: data.result.answerHi,
+          keywords: ['ai', 'dmft', 'ramgarh'],
+          action: data.result.deepLink
+            ? {
+                href: data.result.deepLink,
+                labelEn: data.result.deepLinkText || 'View Details',
+                labelHi: data.result.deepLinkTextHi || 'विवरण देखें',
+              }
+            : undefined,
+        }
+        setConversation((prev) => [
+          ...prev,
+          {
+            id: `conv-${Date.now()}`,
+            question: aiQ,
+            timestamp: timeStr,
+          },
+        ])
+        setSearchQuery('')
+      }
+    } catch (e) {
+      console.error('AI query error:', e)
+    }
+  }
+
   const handleClearConversation = () => {
     setConversation([])
   }
@@ -103,36 +147,53 @@ export function HelpAssistant() {
           <Bot size={15} />
           <span>
             {language === 'hi'
-              ? 'eSapmada ऑफ़लाइन सहायता केंद्र'
-              : 'eSapmada Offline Support Engine'}
+              ? 'पूछें डीएमएफटी एआई — परियोजना बुद्धिमत्ता (RFP मॉड्यूल 6)'
+              : 'Ask DMFT AI — Natural Language Interface (RFP Section III, Module 6)'}
           </span>
         </div>
 
         <h1 className="help-hero-title">
           {language === 'hi'
-            ? 'हम आपकी क्या सहायता कर सकते हैं?'
-            : 'How can we help you?'}
+            ? 'पूछें डीएमएफटी एआई: हम आपकी क्या सहायता कर सकते हैं?'
+            : 'Ask DMFT AI: Project Intelligence'}
         </h1>
         <p className="help-hero-subtitle">
           {language === 'hi'
-            ? 'eSapmada पोर्टल के सभी फीचर्स, परियोजना प्रबंधन, जीपीएस मैपिंग और रिपोर्टिंग के त्वरित उत्तर पाएं।'
-            : 'Get instant, verified answers about using eSapmada, managing project lifecycles, GPS geotagging, and bilingual workflows.'}
+            ? 'प्राकृतिक भाषा में प्रश्न पूछें जैसे "मांडू प्रखंड की विलंबित परियोजनाएं दिखाएं", "कितनी परियोजनाएं चालू हैं?" या 10 जीवनचक्र मॉड्यूल की प्रक्रिया समझें।'
+            : 'Ask project questions in natural language e.g. "Show delayed projects in Mandu Block", "How many projects are under execution?", or explore the 10 lifecycle stages.'}
         </p>
 
-        {/* Search Input Bar */}
+        {/* Search Input Bar with Ask AI Trigger */}
         <div className="help-hero-search-box">
           <Search size={18} className="search-icon" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault()
+                handleAskCustomQuery(searchQuery)
+              }
+            }}
             placeholder={
               language === 'hi'
-                ? 'विषय या प्रश्न खोजें (उदा. नया प्रोजेक्ट, जीपीएस मैप, रिपोर्ट, भाषा)...'
-                : 'Search help topics (e.g., add project, GPS map, reports, hindi, approvals)...'
+                ? 'प्रश्न पूछें (उदा. कितनी योजनाएं चालू हैं? मांडू में विलंबित कार्य? प्रशासनिक स्वीकृति?)...'
+                : 'Ask a question (e.g. How many projects under execution? Delayed projects in Mandu?)...'
             }
             className="help-hero-search-input"
           />
+          {searchQuery && (
+            <button
+              type="button"
+              onClick={() => handleAskCustomQuery(searchQuery)}
+              className="primary-btn"
+              style={{ height: '32px', padding: '0 12px', fontSize: '11px', margin: '0 6px', whiteSpace: 'nowrap' }}
+            >
+              <Bot size={13} />
+              <span>Ask AI</span>
+            </button>
+          )}
           {searchQuery && (
             <button
               type="button"
@@ -407,13 +468,13 @@ export function HelpAssistant() {
         <div>
           <strong>
             {language === 'hi'
-              ? 'शत-प्रतिशत सुरक्षित एवं ऑफ़लाइन समर्थित ज्ञानकोष'
-              : '100% Offline-Capable & Predefined Knowledge Base'}
+              ? 'शत-प्रतिशत सुरक्षित एवं ऑफ़लाइन समर्थित डीएमएफटी एआई ज्ञानकोष'
+              : '100% Offline-Capable Predefined AI Knowledge Base — DMFT Ramgarh'}
           </strong>
           <p style={{ margin: 0, lineHeight: 1.5 }}>
             {language === 'hi'
-              ? 'यह सहायता प्रणाली पूरी तरह से इन-ब्राउज़र काम करती है। इसमें किसी तीसरे पक्ष या बाहरी एआई एपीआई की आवश्यकता नहीं है, जिससे आपकी प्रशासनिक गोपनीयता बनी रहती है।'
-              : 'All troubleshooting and answers run locally within the eSapmada application. No sensitive departmental queries or data leave your local network.'}
+              ? 'यह प्राकृतिक भाषा सहायता प्रणाली पूरी तरह से इन-ब्राउज़र काम करती है। इसमें किसी तीसरे पक्ष या बाहरी सशुल्क एपीआई की आवश्यकता नहीं है, जिससे आपकी प्रशासनिक गोपनीयता शत-प्रतिशत सुरक्षित रहती है।'
+              : 'All natural language project analysis and answers run locally within the DMFT Ramgarh application. No sensitive departmental queries or tender records leave your local network.'}
           </p>
         </div>
       </div>

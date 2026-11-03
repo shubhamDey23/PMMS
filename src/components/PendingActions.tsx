@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { AlertTriangle, ArrowRight, ChevronRight } from 'lucide-react'
 import { alerts } from '@/data/mock-data'
 import { SectionHeader } from './SectionHeader'
@@ -14,9 +15,9 @@ export function PendingActions({ full = false }: { full?: boolean }) {
         title={t.sections.pendingActionsTitle}
         subtitle={t.sections.pendingActionsSubtitle}
         action={
-          <button className="text-action">
+          <Link href="/admin/alerts" className="text-action">
             {language === 'hi' ? 'सभी कार्रवाइयाँ देखें' : 'View all actions'} <ArrowRight size={15} />
-          </button>
+          </Link>
         }
       />
       <div className={`alert-banner ${full ? 'full' : ''}`}>
@@ -35,13 +36,14 @@ export function PendingActions({ full = false }: { full?: boolean }) {
             </p>
           </div>
         </span>
-        <button type="button">
-          {language === 'hi' ? 'महत्वपूर्ण परियोजनाएँ देखें' : 'Review critical projects'} <ArrowRight size={15} />
-        </button>
+        <Link href="/admin/alerts" className="alert-action-link" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+          <span>{language === 'hi' ? 'महत्वपूर्ण परियोजनाएँ देखें' : 'Review critical projects'}</span>
+          <ArrowRight size={15} />
+        </Link>
       </div>
       <div className="action-grid">
         {alerts.map((a) => (
-          <button className="action-card" key={a.label}>
+          <Link href="/admin/alerts" className="action-card" key={a.label} style={{ textDecoration: 'none', color: 'inherit' }}>
             <span className={`icon-tile ${a.tone}`}>
               <a.icon size={19} />
             </span>
@@ -51,7 +53,7 @@ export function PendingActions({ full = false }: { full?: boolean }) {
               <small>{language === 'hi' && a.metaHi ? a.metaHi : a.meta}</small>
             </div>
             <ChevronRight size={17} />
-          </button>
+          </Link>
         ))}
       </div>
     </section>

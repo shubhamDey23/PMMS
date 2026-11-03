@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { ArrowUpRight, ChevronDown, CircleDollarSign } from 'lucide-react'
 import { SectionHeader } from './SectionHeader'
 import { useTranslation } from '@/context/LanguageContext'
@@ -24,9 +25,9 @@ export function ProgressOverview({ onDetailedReport }: { onDetailedReport?: () =
         title={t.sections.performanceOverview}
         subtitle={t.sections.performanceSubtitle}
         action={
-          <button className="text-action" onClick={onDetailedReport}>
+          <Link href="/admin/analytics" className="text-action">
             {t.sections.viewDetailedReport} <ArrowUpRight size={15} />
-          </button>
+          </Link>
         }
       />
       <div className="performance-grid">

@@ -37,12 +37,12 @@ export function GeoOverview({
   const [geoLoading, setGeoLoading] = useState(false)
   const [geoNotice, setGeoNotice] = useState<{ type: 'info' | 'error'; message: string } | null>(null)
 
-  // Real geographic bounding box of the Ranchi, Jharkhand map tiles (1024x768)
-  const RANCHI_BOUNDS = {
-    minLat: 23.24135,
-    maxLat: 23.48340,
-    minLng: 85.16602,
-    maxLng: 85.51758,
+  // Real geographic bounding box of Ramgarh District, Jharkhand
+  const RAMGARH_BOUNDS = {
+    minLat: 23.4500,
+    maxLat: 23.8500,
+    minLng: 85.2000,
+    maxLng: 85.8500,
   }
 
   // Filter projects with valid latitude and longitude
@@ -57,9 +57,9 @@ export function GeoOverview({
   const withoutCoordsCount = projects.length - geoProjects.length
 
   const projectToCanvas = (lat: number, lng: number) => {
-    // If coordinate is outside Ranchi bounds, gracefully clamp
-    const x = ((lng - RANCHI_BOUNDS.minLng) / (RANCHI_BOUNDS.maxLng - RANCHI_BOUNDS.minLng)) * 100
-    const y = ((RANCHI_BOUNDS.maxLat - lat) / (RANCHI_BOUNDS.maxLat - RANCHI_BOUNDS.minLat)) * 100
+    // If coordinate is outside Ramgarh bounds, gracefully clamp
+    const x = ((lng - RAMGARH_BOUNDS.minLng) / (RAMGARH_BOUNDS.maxLng - RAMGARH_BOUNDS.minLng)) * 100
+    const y = ((RAMGARH_BOUNDS.maxLat - lat) / (RAMGARH_BOUNDS.maxLat - RAMGARH_BOUNDS.minLat)) * 100
 
     return { x: Math.max(4, Math.min(96, x)), y: Math.max(6, Math.min(94, y)) }
   }
@@ -209,9 +209,9 @@ export function GeoOverview({
       >
         <div className="geo-grid-overlay" style={{ opacity: mapStyle === 'street' ? 0.08 : 0.15 }} />
         <div className="geo-boundary-shape" style={{ background: 'rgba(15, 23, 42, 0.78)', backdropFilter: 'blur(4px)', color: '#fff', border: '1px solid rgba(255,255,255,0.18)', borderRadius: '8px', padding: '6px 12px' }}>
-          📍 RANCHI, JHARKHAND — DEVELOPMENT CORRIDOR
+          📍 RAMGARH DISTRICT, JHARKHAND — DMFT MINING AFFECTED CORRIDOR
           <small style={{ color: '#94a3b8', display: 'block', fontSize: '11px', marginTop: '2px' }}>
-            Lat: 23.24°N – 23.48°N | Lon: 85.16°E – 85.52°E
+            Lat: 23.45°N – 23.85°N | Lon: 85.20°E – 85.85°E • Mandu | Patratu | Ramgarh | Gola | Chitarpur | Dulmi
           </small>
         </div>
 

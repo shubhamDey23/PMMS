@@ -15,8 +15,8 @@ export default function AdminMapPage() {
         title={language === 'hi' ? 'परियोजना मानचित्र (जीपीएस)' : 'Project Geographic Map'}
         subtitle={
           language === 'hi'
-            ? 'रांची जिले एवं झारखण्ड राज्य में संचालित सभी विकास परियोजनाओं की वास्तविक भौगोलिक स्थिति, भौतिक प्रगति एवं सत्यापन'
-            : 'Interactive GIS project visualization with verified GPS coordinates and OpenStreetMap satellite layers'
+            ? 'रामगढ़ जिले (मांडू, पतरातू, गोला, चितरपुर, दुलमी एवं रामगढ़) में डीएमएफटी अंतर्गत संचालित विकास परियोजनाओं की भौगोलिक स्थिति एवं सत्यापन'
+            : 'Interactive GIS project visualization across Ramgarh District blocks (Mandu, Patratu, Ramgarh, Gola, Chitarpur, Dulmi) with verified GPS coordinates'
         }
       />
       <ProjectMap />

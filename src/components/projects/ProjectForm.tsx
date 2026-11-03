@@ -70,7 +70,7 @@ export function ProjectForm({
 
     state: 'Jharkhand',
     district: 'Ramgarh',
-    block: 'Chandipur',
+    block: 'Mandu',
     panchayat: '',
     village: '',
     address: '',
@@ -371,11 +371,12 @@ export function ProjectForm({
                 <div className="form-field">
                   <label htmlFor="block">{t.form.block}</label>
                   <Field as="select" id="block" name="block">
-                    <option value="Chandipur">Chandipur / चांदीपुर</option>
-                    <option value="Kalyanpur">Kalyanpur / कल्याणपुर</option>
-                    <option value="Rajnagar">Rajnagar / राजनगर</option>
-                    <option value="Devgarh">Devgarh / देवगढ़</option>
-                    <option value="Bhawanipur">Bhawanipur / भवानीपुर</option>
+                    <option value="Mandu">Mandu / मांडू</option>
+                    <option value="Patratu">Patratu / पतरातू</option>
+                    <option value="Ramgarh">Ramgarh / रामगढ़</option>
+                    <option value="Gola">Gola / गोला</option>
+                    <option value="Chitarpur">Chitarpur / चितरपुर</option>
+                    <option value="Dulmi">Dulmi / दुलमी</option>
                   </Field>
                 </div>
                 <div className="form-field">
@@ -578,11 +579,16 @@ export function ProjectForm({
                 <div className="form-field">
                   <label htmlFor="stage">{t.form.stage}</label>
                   <Field as="select" id="stage" name="stage">
-                    <option value="Recommendation">Recommendation / अनुशंसा</option>
-                    <option value="Administrative approval">Administrative Approval / प्रशासनिक स्वीकृति</option>
-                    <option value="Tender">Tender &amp; Agreement / निविदा</option>
-                    <option value="Under execution">Under execution / क्रियान्वयन में</option>
-                    <option value="Completed">Completed / पूर्ण</option>
+                    <option value="Recommendation">Stage 1: Work Request &amp; Recommendation / अनुशंसा</option>
+                    <option value="Acceptance">Stage 2: Work Acceptance / स्वीकृति</option>
+                    <option value="Technical approval">Stage 3: Technical Approval (TS) / तकनीकी स्वीकृति</option>
+                    <option value="Administrative approval">Stage 4: Administrative Approval (AS) / प्रशासनिक स्वीकृति</option>
+                    <option value="Tender">Stage 5: Work Execution &amp; Tender / निविदा</option>
+                    <option value="Under execution">Stage 6: Physical Progress &amp; Measurement / भौतिक प्रगति</option>
+                    <option value="Payment requisition">Stage 7: Payment Requisition / भुगतान अधियाचन</option>
+                    <option value="Inspection">Stage 8: Site Inspection &amp; Audit / स्थलीय निरीक्षण</option>
+                    <option value="Financial progress">Stage 9: Financial Progress &amp; Release / वित्तीय प्रगति</option>
+                    <option value="Completed">Stage 10: Handover &amp; Commissioning / हैंडओवर एवं लोकार्पण</option>
                   </Field>
                 </div>
                 <div className="form-field">

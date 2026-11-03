@@ -39,25 +39,25 @@ const mapConfig = fs.readFileSync(mapConfigPath, 'utf8')
 
 assert(mapConfig.includes('https://tile.openstreetmap.org/{z}/{x}/{y}.png'), 'OSM standard tile URL configured')
 assert(mapConfig.includes('OpenStreetMap</a> contributors'), 'Attribution to OpenStreetMap contributors included')
-assert(mapConfig.includes('23.3441') && mapConfig.includes('85.3096'), 'Default coordinates set to Ranchi headquarters [23.3441, 85.3096]')
+assert(mapConfig.includes('23.6332') && mapConfig.includes('85.5144'), 'Default coordinates set to Ramgarh headquarters [23.6332, 85.5144]')
 assert(mapConfig.includes('statusColors'), 'statusColors configured for Ongoing, Completed, Delayed')
 
 // 3. Verify Mock Projects Coordinates
-console.log('\n--- 3. Real Ranchi Coordinates in Projects ---')
+console.log('\n--- 3. Real Ramgarh Coordinates in Projects ---')
 const mockDataPath = path.resolve('src/data/mock-data.ts')
 const mockData = fs.readFileSync(mockDataPath, 'utf8')
 
-assert(mockData.includes('latitude: 23.422') && mockData.includes('longitude: 85.318'), 'PRJ-2024-0814 has valid Ranchi coordinates (Kanke)')
-assert(mockData.includes('latitude: 23.372') && mockData.includes('longitude: 85.285'), 'PRJ-2024-0762 has valid Ranchi coordinates (Ratu)')
-assert(mockData.includes('latitude: 23.366') && mockData.includes('longitude: 85.3375'), 'PRJ-2024-0695 has valid Ranchi coordinates (Lalpur)')
-assert(mockData.includes('latitude: 23.3325') && mockData.includes('longitude: 85.3852'), 'PRJ-2024-0551 has valid Ranchi coordinates (Namkum)')
-assert(mockData.includes('latitude: 23.3102') && mockData.includes('longitude: 85.2954'), 'PRJ-2024-0418 has valid Ranchi coordinates (Dhurwa)')
-assert(mockData.includes('latitude: 23.268') && mockData.includes('longitude: 85.291'), 'PRJ-2024-0382 has valid Ranchi coordinates (Tupudana)')
+assert(mockData.includes('latitude: 23.7942') && mockData.includes('longitude: 85.4712'), 'PRJ-DMFT-RMG-0814 has valid Ramgarh coordinates (Mandu)')
+assert(mockData.includes('latitude: 23.6685') && mockData.includes('longitude: 85.2892'), 'PRJ-DMFT-RMG-0762 has valid Ramgarh coordinates (Patratu)')
+assert(mockData.includes('latitude: 23.6186') && mockData.includes('longitude: 85.5245'), 'PRJ-DMFT-RMG-0695 has valid Ramgarh coordinates (Chhatarmandu)')
+assert(mockData.includes('latitude: 23.5412') && mockData.includes('longitude: 85.7124'), 'PRJ-DMFT-RMG-0551 has valid Ramgarh coordinates (Gola)')
+assert(mockData.includes('latitude: 23.578') && mockData.includes('longitude: 85.654'), 'PRJ-DMFT-RMG-0418 has valid Ramgarh coordinates (Chitarpur)')
+assert(mockData.includes('latitude: 23.512') && mockData.includes('longitude: 85.548'), 'PRJ-DMFT-RMG-0382 has valid Ramgarh coordinates (Dulmi)')
 
 // 4. Verify Admin Navigation Items
 console.log('\n--- 4. Admin Navigation Updates ---')
-assert(mockData.includes("label: 'Project Map'") && mockData.includes("href: '/admin/map'"), 'navItems includes Project Map (/admin/map)')
-assert(mockData.includes("label: 'Help Assistant'") && mockData.includes("href: '/admin/help'"), 'navItems includes Help Assistant (/admin/help)')
+assert(mockData.includes("label: 'Project Map (GIS)'") && mockData.includes("href: '/admin/map'"), 'navItems includes Project Map (GIS) (/admin/map)')
+assert(mockData.includes("label: 'Ask DMFT AI'") && mockData.includes("href: '/admin/help'"), 'navItems includes Ask DMFT AI (/admin/help)')
 
 // 5. Verify Components & SSR Safety
 console.log('\n--- 5. Component Structure & SSR Safety ---')

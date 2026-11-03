@@ -138,7 +138,7 @@ export default function ProjectMapClient() {
 
       const title = language === 'hi' && project.nameHi ? project.nameHi : project.nameEn
       const dept = project.department || 'Infrastructure'
-      const block = project.location?.block || 'Ranchi'
+      const block = project.location?.block || 'Ramgarh'
       const village = project.location?.village || ''
       const statusColor = statusColors[project.status]?.bg || '#2563eb'
       const statusLabel =
@@ -171,7 +171,7 @@ export default function ProjectMapClient() {
             <div style="display: flex; align-items: center; gap: 4px;">
               <strong>${dept}</strong>
             </div>
-            <div>📍 ${village ? `${village}, ` : ''}${block}, Ranchi</div>
+            <div>📍 ${village ? `${village}, ` : ''}${block}, Ramgarh District</div>
           </div>
 
           <!-- Progress Bars -->
@@ -309,7 +309,7 @@ export default function ProjectMapClient() {
     []
   )
 
-  // Reset view to Ranchi bounds
+  // Reset view to Ramgarh district center
   const handleResetView = () => {
     const map = mapRef.current
     if (!map) return
@@ -453,7 +453,7 @@ export default function ProjectMapClient() {
               type="button"
               onClick={handleResetView}
               className="map-action-btn secondary"
-              title="Reset map view to Ranchi center"
+              title="Reset map view to Ramgarh district center"
             >
               <RotateCcw size={15} />
               <span>{language === 'hi' ? 'रीसेट' : 'Reset View'}</span>
@@ -602,7 +602,7 @@ export default function ProjectMapClient() {
                       <h4 className="map-project-item-title">{title}</h4>
 
                       <div className="map-project-item-meta">
-                        <span>📍 {p.location.block || 'Ranchi'}</span>
+                        <span>📍 {p.location.block || 'Ramgarh'}, Ramgarh</span>
                         <strong style={{ color: '#0f172a' }}>
                           {formatCurrency(p.financials?.approvedAmount || 0)}
                         </strong>

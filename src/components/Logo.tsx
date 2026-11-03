@@ -3,11 +3,11 @@ import Image from 'next/image'
 export function Logo({ compact = false }: { compact?: boolean }) {
   if (compact) {
     return (
-      <div className="brand brand-compact" title="eSapmada by Eccentric">
+      <div className="brand brand-compact" title="DMFT Work Monitoring Portal — Ramgarh">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/logo-icon.png"
-          alt="eSapmada by Eccentric Icon"
+          alt="DMFT Work Monitoring Portal Icon"
           className="brand-logo-icon"
           width={38}
           height={38}
@@ -17,11 +17,11 @@ export function Logo({ compact = false }: { compact?: boolean }) {
   }
 
   return (
-    <div className="brand brand-full" title="eSapmada by Eccentric">
+    <div className="brand brand-full" title="DMFT Work Monitoring Portal — Ramgarh">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/esampada-logo.png"
-        alt="eSapmada by Eccentric"
+        alt="DMFT Work Monitoring Portal — Ramgarh"
         className="brand-logo-full"
         style={{ height: '42px', width: 'auto', objectFit: 'contain' }}
       />

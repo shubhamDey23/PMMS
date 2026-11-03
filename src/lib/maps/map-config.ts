@@ -11,7 +11,7 @@ export const defaultMapConfig: MapConfig = {
   tileUrl: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
   attribution:
     '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors',
-  defaultCenter: [23.3441, 85.3096], // Ranchi District Headquarters, Jharkhand
+  defaultCenter: [23.6332, 85.5144], // Ramgarh District Headquarters (Collectorate Chhatarmandu), Jharkhand
   defaultZoom: 12,
   maxZoom: 19,
   minZoom: 6,

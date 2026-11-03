@@ -20,7 +20,7 @@ export function FloatingHelpButton() {
       <Link
         href="/admin/help"
         className="floating-help-trigger"
-        aria-label="eSapmada Help Assistant"
+        aria-label="Ask DMFT AI"
       >
         <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
           <Bot size={18} color="#ffffff" />
@@ -37,7 +37,7 @@ export function FloatingHelpButton() {
             }}
           />
         </div>
-        <span>{language === 'hi' ? 'सहायता चाहिए?' : 'Need Help?'}</span>
+        <span>{language === 'hi' ? 'पूछें DMFT AI' : 'Ask DMFT AI'}</span>
       </Link>
     </div>
   )

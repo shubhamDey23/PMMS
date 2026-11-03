@@ -3,8 +3,8 @@ import './globals.css'
 import { LanguageProvider } from '@/context/LanguageContext'
 
 export const metadata: Metadata = {
-  title: 'eSapmada by Eccentric — Project Monitoring & Management System',
-  description: 'eSapmada by Eccentric — Comprehensive Project Monitoring, Geolocation & Management System.',
+  title: 'DMFT Work Monitoring Portal — Ramgarh District, Jharkhand',
+  description: 'District Mineral Foundation Trust (DMFT), Ramgarh — End-to-end Project Lifecycle, GIS Monitoring, MIS Reporting & Digital Governance.',
   icons: {
     icon: '/logo-icon.png',
     shortcut: '/logo-icon.png',

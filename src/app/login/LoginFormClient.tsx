@@ -106,10 +106,11 @@ export function LoginFormClient({ initialNextUrl }: { initialNextUrl: string }) 
         {/* Left Side: Welcome Hero Copy matching screenshot */}
         <div className="ecentric-login-hero">
           <div className="hero-text-block">
-            <h1 className="hero-heading">Welcome to eSapmada by Eccentric</h1>
+            <h1 className="hero-heading">Welcome to DMFT Ramgarh Portal</h1>
             <p className="hero-description">
-              An online monitoring system, End to End AI &amp; Blockchain based Portal for Monitoring
-              all the Inventories Supplied, Raising Complaints &amp; Suggesting better Vendors/Suppliers.
+              District Mineral Foundation Trust (DMFT), Ramgarh — An integrated digital platform for
+              planning, tracking, GIS-based monitoring, physical &amp; financial progress, and reporting of
+              development projects in mining-affected areas.
             </p>
           </div>
         </div>
@@ -224,7 +225,7 @@ export function LoginFormClient({ initialNextUrl }: { initialNextUrl: string }) 
                   href="#forgot-password"
                   onClick={(e) => {
                     e.preventDefault()
-                    alert('Please contact your eSapmada by Eccentric system administrator to reset your credentials.')
+                    alert('Please contact the DMFT Ramgarh Planning Cell system administrator at 06553-231359 to reset your credentials.')
                   }}
                   className="forgot-password-link"
                 >
@@ -258,7 +259,7 @@ export function LoginFormClient({ initialNextUrl }: { initialNextUrl: string }) 
                   href="#signup"
                   onClick={(e) => {
                     e.preventDefault()
-                    alert('Officer registration is managed through the eSapmada by Eccentric administrative portal. Contact your department administrator.')
+                    alert('Officer registration is managed through the District Planning Office, DMFT Ramgarh. Contact your department nodal officer.')
                   }}
                   className="signup-link"
                 >

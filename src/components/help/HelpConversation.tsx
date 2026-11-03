@@ -78,7 +78,7 @@ export function HelpConversation({
               }}
             />
             <span style={{ fontSize: '12px', fontWeight: 600, color: '#334155' }}>
-              eSapmada Assistant
+              DMFT AI Assistant
             </span>
           </div>
         </div>
@@ -167,7 +167,7 @@ export function HelpConversation({
                       }}
                     >
                       <Sparkles size={13} color="#f59e0b" />
-                      eSapmada Verified Guide
+                      Ask DMFT AI — Intelligence Engine
                     </span>
                     <span style={{ fontSize: '10.5px', color: '#94a3b8' }}>
                       {language === 'hi' ? 'प्रशासनिक नियम' : 'Official Workflow'}
